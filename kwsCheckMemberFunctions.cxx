@@ -134,7 +134,7 @@ bool Parser::CheckMemberFunctions(const char* regEx,unsigned long maxLength)
           error.line = this->GetLineNumber(current,true);
           error.line2 = error.line;
           error.number = MEMBERFUNCTION_REGEX;
-          error.description = "member function (" + memberFunction + ") doesn't match regular expression";
+          error.description = "member function (" + memberFunction + ") doesn't match regular expression: " + regEx;
           m_ErrorList.push_back(error);
           hasError = true;
           }

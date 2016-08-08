@@ -103,7 +103,7 @@ const char ErrorTag[NUMBER_ERRORS][4] = {
    {'B','L','K','\0'},
    {'S','P','L','\0'},
    {'V','P','L','\0'},
-   {'B','C','H','\0'},   
+   {'B','C','H','\0'},
    {'M','B','F','\0'},
    {'M','F','L','\0'},
    {'F','R','G','\0'},
@@ -118,7 +118,7 @@ typedef struct
   unsigned long line; // main line of the error
   unsigned long line2; // second line of error if the error is covering several lines
   unsigned long number;
-  std::string description; 
+  std::string description;
   } Error;
 
 typedef struct
@@ -126,7 +126,7 @@ typedef struct
   unsigned long line; // main line of the warning
   unsigned long line2; // second line of warning if the warning is covering several lines
   unsigned long number;
-  std::string description; 
+  std::string description;
   } Warning;
 
 typedef struct
@@ -134,10 +134,10 @@ typedef struct
   // Position in the file
   size_t position;
   // What should be the position in the line of
-  // the word w.r.t the previous position 
+  // the word w.r.t the previous position
   int current;
   // What should be the position in the line of
-  // the words after w.r.t the previous position 
+  // the words after w.r.t the previous position
   int after;
   // Name of the current ident
   std::string name;
@@ -155,21 +155,21 @@ public:
 
   /** To be able to use std::sort we provide the < operator */
   bool operator<(const Parser& a) const;
-  
+
   typedef std::vector<Error>                ErrorVectorType;
   typedef std::vector<Warning>              WarningVectorType;
   typedef std::pair<size_t,size_t>          IfElseEndifPairType;
   typedef std::vector<IfElseEndifPairType>  IfElseEndifListType;
 
   /** Set the buffer to analyze */
-  void SetBuffer(std::string buffer) 
+  void SetBuffer(std::string buffer)
     {
     m_Buffer = buffer;
     this->ConvertBufferToWindowsFileType(m_Buffer);
     m_FixedBuffer = m_Buffer;
     this->RemoveComments();
     }
- 
+
   /** Return the error tag as string given the error number */
   std::string GetErrorTag(unsigned long number) const;
 
@@ -205,8 +205,8 @@ public:
                      bool checkWrongComment=true,
                      bool checkMissingComment=true);
 
-  /** Check the indent size 
-   *  Not in the header file if there is one 
+  /** Check the indent size
+   *  Not in the header file if there is one
    *  If CheckHeader has been done before CheckIndent and doNotCheckHeader is set to true
    *  then the header is not checked for indent*/
   bool CheckIndent(IndentType,
@@ -227,10 +227,10 @@ public:
 
   /** Check if the internal parameters of the class are correct */
   bool CheckInternalVariables(const char* regEx,bool alignement = true,bool checkProtected=false);
-  
+
   /** Check variables implementation */
   bool CheckVariables(const char* regEx);
-  
+
   /** Check Member Functions implementation */
   bool CheckMemberFunctions(const char* regEx,unsigned long maxLength=0);
 
@@ -238,7 +238,8 @@ public:
   bool CheckFunctions(const char* regEx,unsigned long maxLength=0);
 
   /** Check if the strcut parameters of the class are correct */
-  bool CheckStruct(const char* regEx,bool alignement = true);
+  // FIXME Temporarily set alignement to false
+  bool CheckStruct(const char* regEx,bool alignement = false);
 
   /** Check if the typedefs of the class are correct */
   bool CheckTypedefs(const char* regEx, bool alignment = true,
@@ -253,11 +254,11 @@ public:
   /** Check the number of space between the end of the declaration
    *  and the semicolon */
   bool CheckSemicolonSpace(unsigned long max);
- 
+
   /** Check the number of statements per line */
   bool CheckStatementPerLine(unsigned long max=1,
                              bool checkInlineFunctions=true);
-  
+
   /** Check the number of variables per line */
   bool CheckVariablePerLine(unsigned long max=1);
 
@@ -267,7 +268,7 @@ public:
   /** Check if the end of the file has a new line */
   bool CheckEndOfFileNewLine();
 
-  /** Check header 
+  /** Check header
    *  Because most of the time the header is checked in cvs we should ignore the $ $*/
   bool CheckHeader(const char* filename,bool considerSpaceEOL = true,bool useCVS=true);
 
@@ -291,7 +292,7 @@ public:
 
   /** Clear the error list */
   void ClearErrors() {m_ErrorList.clear();}
-  
+
   /** Clear the info list */
   void ClearInfo() {m_WarningList.clear();}
 
@@ -307,13 +308,13 @@ public:
 
   /** Return if a test has been performed */
   bool HasBeenPerformed(unsigned int test) const;
- 
+
   /** Return the test description given the error number) */
   std::string GetTestDescription(unsigned int test) const;
 
   /** Given the name of the check to perform and the default value perform the check */
   bool Check(const char* name, const char* value);
-  
+
   /** Should KWStyle produce a fix version of the parsed file */
   void SetFixFile(bool fix) {m_FixFile = fix;}
   void GenerateFixedFile();
@@ -325,29 +326,29 @@ protected:
 
   /** Convert the file with CR+LF instead of LF */
   void ConvertBufferToWindowsFileType(std::string & buffer);
-  
+
   /** Check the operator.
    *  \warning This function add an error in the Error list */
-  bool FindOperator(const char* op,unsigned int before, 
+  bool FindOperator(const char* op,unsigned int before,
                     unsigned int after,unsigned long maxSize,
                     bool doNotCheckInsideParenthesis=true);
 
-  /** Get the class position within the file. This function checks that this is the 
+  /** Get the class position within the file. This function checks that this is the
    *  classname */
   size_t GetClassPosition(size_t position,std::string buffer="") const;
 
-  /** Return the position in the line given the position in the text */ 
+  /** Return the position in the line given the position in the text */
   size_t GetPositionInLine(size_t pos);
 
   /** Find an ivar in the source code */
   std::string FindInternalVariable(size_t start, size_t end,size_t& pos);
-  
+
   /** Find an ivar in the source code */
   std::string FindVariable(std::string & buffer,size_t start, size_t end,size_t& pos);
-  
+
   /** Find a member function in the source code */
   std::string FindMemberFunction(std::string & buffer,size_t start, size_t end,size_t& pos);
- 
+
   /** Find a typedef in the source code */
   std::string FindTypedef(size_t start, size_t end,size_t& pos,size_t & beg,size_t & typedefpos);
 
@@ -373,7 +374,7 @@ protected:
   size_t FindOpeningChar(char closeChar, char openChar, size_t pos,bool noComment=false) const;
 
   /** Find the constructor in the file. */
-  size_t FindConstructor(const std::string & buffer, const std::string & className, 
+  size_t FindConstructor(const std::string & buffer, const std::string & className,
                          bool headerfile=true, size_t startPos=0) const;
 
   /** Return true if the position pos is between <>.
@@ -403,13 +404,13 @@ protected:
 
   /**  Return true if the position pos is inside a comment */
   bool IsInComments(size_t pos) const;
-  
+
   /**  Return true if the position pos is inside a function */
   bool IsInFunction(size_t pos,const char* buffer=NULL) const;
 
   /**  Return true if the position pos is inside a struct */
   bool IsInStruct(size_t pos,const char* buffer=NULL) const;
-  
+
   /**  Return true if the position pos is inside a union */
   bool IsInUnion(size_t pos,const char* buffer=NULL) const;
 
@@ -438,7 +439,7 @@ protected:
   /** Return if the dept of the current class */
   int IsInClass(size_t position) const;
 
-  /** Return the position of the last character 
+  /** Return the position of the last character
    *  of the function name/definition/ */
   size_t FindFunction(size_t position,const char* buffer=NULL) const;
 
@@ -451,7 +452,7 @@ protected:
 
   /** Check if the current position is a valid switch statement */
   bool CheckValidSwitchStatement(unsigned int posSwitch);
-            
+
 private:
 
   ErrorVectorType   m_ErrorList;

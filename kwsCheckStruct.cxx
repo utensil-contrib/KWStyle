@@ -53,7 +53,7 @@ bool Parser::CheckStruct(const char* regEx,bool alignment)
 
     size_t previousline = 0;
     size_t previouspos = 0;
-    
+
     size_t pos = begin;
     while(pos!= std::string::npos)
       {
@@ -64,7 +64,7 @@ bool Parser::CheckStruct(const char* regEx,bool alignment)
         }
 
       if(var.length() > 0)
-        {   
+        {
         // Check the alignment if specified
         if(alignment)
           {
@@ -100,7 +100,7 @@ bool Parser::CheckStruct(const char* regEx,bool alignment)
           error.line = this->GetLineNumber(pos,true);
           error.line2 = error.line;
           error.number = SVAR_REGEX;
-          error.description = "Struct variable (" + var + ") doesn't match regular expression";
+          error.description = "Struct variable (" + var + ") doesn't match regular expression: " + regEx;
           m_ErrorList.push_back(error);
           hasError = true;
           }
