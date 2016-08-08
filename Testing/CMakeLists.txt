@@ -11,9 +11,9 @@ SET(
  kwsBadCharactersTest.cxx
 )
 
-FOREACH(TestFiles ${KWStyleTests_SRCS})   
-  GET_FILENAME_COMPONENT(TestProgram ${TestFiles} NAME_WE)   
-  ADD_TEST(${TestProgram} ${KWSTYLE_TESTS} ${TestProgram}) 
+FOREACH(TestFiles ${KWStyleTests_SRCS})
+  GET_FILENAME_COMPONENT(TestProgram ${TestFiles} NAME_WE)
+  ADD_TEST(${TestProgram} ${KWSTYLE_TESTS} ${TestProgram})
 ENDFOREACH(TestFiles)
 
 SET(KWStyleTests_SRCS
@@ -67,3 +67,4 @@ ADD_TEST_FROM_BUG_TRACKER(9937 test.cxx)
 ADD_TEST_FROM_BUG_TRACKER(9938 test.cxx)
 ADD_TEST_FROM_BUG_TRACKER(9939 test.cxx)
 ADD_TEST_FROM_BUG_TRACKER(10872 test.cxx)
+ADD_TEST_FROM_BUG_TRACKER(20000 test.cxx)

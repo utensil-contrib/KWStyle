@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Description>
+  <LineLength>81</LineLength>
+  <InternalVariables>
+    <regex>^[sm]_[a-z]+([A-Z][a-z0-9]*)*$</regex>
+    <alignment>0</alignment>
+    <private>0</private>
+  </InternalVariables>
+  <SemicolonSpace>0</SemicolonSpace>
+  <DeclarationOrder>
+    <public>0</public>
+    <protected>1</protected>
+    <private>2</private>
+  </DeclarationOrder>
+  <EndOfFileNewLine>true</EndOfFileNewLine>
+  <Tabs>1</Tabs>
+  <Spaces>0</Spaces>
+  <NameOfClass>[NameOfClass],C</NameOfClass>
+  <Comments>
+    <begin>/**</begin>
+    <middle></middle>
+    <end>*/</end>
+    <emptyLineBeforeClass>true</emptyLineBeforeClass>
+    <checkWrongComment>false</checkWrongComment>
+    <checkMissingComment>false</checkMissingComment>
+  </Comments>
+  <EmptyLines>2</EmptyLines>
+  <Operator>
+    <spaceBefore>1</spaceBefore>
+    <spaceAfter>1</spaceAfter>
+  </Operator>
+  <Struct>^[a-z][a-z0-9]*([A-Z][a-z0-9]*)*$</Struct>
+  <StatementPerLine>
+    <maxNumber>1</maxNumber>
+    <checkInline>0</checkInline>
+    // default is true
+  </StatementPerLine>
+  <VariablePerLine>
+    <maxNumber>1</maxNumber>
+  </VariablePerLine>
+  <Variables>
+    <regex>^[a-z][a-z0-9]*([A-Z][a-z0-9]*)*$</regex>
+  </Variables>
+  <MemberFunctions>
+    <regex>^[A-Z][a-z0-9]*([A-Z][a-z0-9]*)*$</regex>
+    <length>100</length>
+  </MemberFunctions>
+  <Functions>
+    <regex>^[A-Z][a-z0-9]*([A-Z][a-z0-9]*)*$</regex>
+    <length>100</length>
+  </Functions>
+</Description>
